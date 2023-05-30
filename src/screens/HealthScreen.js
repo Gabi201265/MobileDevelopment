@@ -22,6 +22,8 @@ const HealthScreen = () => {
     console.log('Health Goal:', healthGoal);
     const bmr = calculateBMR(age, gender, height, weight);
     console.log('BMR : ', bmr);
+    const totalCalories = calculateTotalCalories(bmr, activityLevel, healthGoal);
+    console.log('Total Calories:', totalCalories);
   };
 
   const calculateBMR = (age, gender, height, weight) => {
@@ -33,6 +35,40 @@ const HealthScreen = () => {
     }
     // To have only 2 decimals
     return bmr.toFixed(2);
+  };
+
+  const calculateTotalCalories = (bmr, activityLevel, healthGoal) => {
+    let totalCalories = 0;
+    switch (activityLevel) {
+      case 'sedentary':
+        totalCalories = bmr * 1.2;
+        break;
+      case 'light-exercise':
+        totalCalories = bmr * 1.375;
+        break;
+      case 'moderate-exercise':
+        totalCalories = bmr * 1.55;
+        break;
+      case 'heavy-exercise':
+        totalCalories = bmr * 1.725;
+        break;
+      case 'extra-active':
+        totalCalories = bmr * 1.9;
+        break;
+      default:
+        break;
+    }
+    switch (healthGoal) {
+      case 'weight-loss':
+        totalCalories -= 500;
+        break;
+      case 'weight-gain':
+        totalCalories += 500;
+        break;
+      default:
+        break;
+    }
+    return totalCalories.toFixed(2);
   };
 
   return (
