@@ -2,6 +2,8 @@ import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 
+import ResultScreen from './ResultScreen';
+
 const HealthScreen = () => {
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
@@ -9,10 +11,10 @@ const HealthScreen = () => {
   const [weight, setWeight] = useState('');
   const [activityLevel, setActivityLevel] = useState('');
   const [healthGoal, setHealthGoal] = useState('');
+  const [totalCalories, setTotalCalories] = useState(0);
+  const [showResult, setShowResult] = useState(false);
 
   const handleSubmit = () => {
-    // Perform necessary calculations or data processing
-    // based on the user inputs
     console.log('Submitted!');
     console.log('Age:', age);
     console.log('Gender:', gender);
@@ -22,8 +24,13 @@ const HealthScreen = () => {
     console.log('Health Goal:', healthGoal);
     const bmr = calculateBMR(age, gender, height, weight);
     console.log('BMR : ', bmr);
-    const totalCalories = calculateTotalCalories(bmr, activityLevel, healthGoal);
-    console.log('Total Calories:', totalCalories);
+    const myTotalAfterChanged = calculateTotalCalories(bmr, activityLevel, healthGoal);
+    setTotalCalories(myTotalAfterChanged);
+    // Sometimes it sends 0 because it's an asynchrone process
+    console.log('Total Calories before :', totalCalories);
+    // But :
+    console.log('Total Calories :', myTotalAfterChanged);
+    setShowResult(true);
   };
 
   const calculateBMR = (age, gender, height, weight) => {
@@ -133,6 +140,7 @@ const HealthScreen = () => {
         disabled={!age || !gender || !height || !weight || !activityLevel || !healthGoal}
         onPress={handleSubmit}
       />
+      {showResult && <ResultScreen totalCalories={totalCalories} />}
     </View>
   );
 };
