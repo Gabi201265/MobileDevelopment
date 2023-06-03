@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import React, { useState } from 'react';
+import { View, TextInput, Button, StyleSheet } from 'react-native';
 
-
+import ResultScreen from './ResultScreen';
 
 const HealthScreen = () => {
   const [age, setAge] = useState('');
@@ -11,10 +11,10 @@ const HealthScreen = () => {
   const [weight, setWeight] = useState('');
   const [activityLevel, setActivityLevel] = useState('');
   const [healthGoal, setHealthGoal] = useState('');
+  const [totalCalories, setTotalCalories] = useState(0);
+  const [showResult, setShowResult] = useState(false);
 
   const handleSubmit = () => {
-    // Perform necessary calculations or data processing
-    // based on the user inputs
     console.log('Submitted!');
     console.log('Age:', age);
     console.log('Gender:', gender);
@@ -22,6 +22,60 @@ const HealthScreen = () => {
     console.log('Weight:', weight);
     console.log('Activity Level:', activityLevel);
     console.log('Health Goal:', healthGoal);
+    const bmr = calculateBMR(age, gender, height, weight);
+    console.log('BMR : ', bmr);
+    const myTotalAfterChanged = calculateTotalCalories(bmr, activityLevel, healthGoal);
+    setTotalCalories(myTotalAfterChanged);
+    // Sometimes it sends 0 because it's an asynchrone process
+    console.log('Total Calories before :', totalCalories);
+    // But :
+    console.log('Total Calories :', myTotalAfterChanged);
+    setShowResult(true);
+  };
+
+  const calculateBMR = (age, gender, height, weight) => {
+    let bmr = 0;
+    if (gender === 'male') {
+      bmr = 88.362 + 13.397 * weight + 4.799 * height - 5.677 * age;
+    } else if (gender === 'female') {
+      bmr = 447.593 + 9.247 * weight + 3.098 * height - 4.33 * age;
+    }
+    // To have only 2 decimals
+    return bmr.toFixed(2);
+  };
+
+  const calculateTotalCalories = (bmr, activityLevel, healthGoal) => {
+    let totalCalories = 0;
+    switch (activityLevel) {
+      case 'sedentary':
+        totalCalories = bmr * 1.2;
+        break;
+      case 'light-exercise':
+        totalCalories = bmr * 1.375;
+        break;
+      case 'moderate-exercise':
+        totalCalories = bmr * 1.55;
+        break;
+      case 'heavy-exercise':
+        totalCalories = bmr * 1.725;
+        break;
+      case 'extra-active':
+        totalCalories = bmr * 1.9;
+        break;
+      default:
+        break;
+    }
+    switch (healthGoal) {
+      case 'weight-loss':
+        totalCalories -= 500;
+        break;
+      case 'weight-gain':
+        totalCalories += 500;
+        break;
+      default:
+        break;
+    }
+    return totalCalories.toFixed(2);
   };
 
   return (
@@ -37,8 +91,7 @@ const HealthScreen = () => {
       <Picker
         style={styles.input}
         selectedValue={gender}
-        onValueChange={(value) => setGender(value)}
-      >
+        onValueChange={(value) => setGender(value)}>
         <Picker.Item label="Select Gender" value="" />
         <Picker.Item label="Male" value="male" />
         <Picker.Item label="Female" value="female" />
@@ -63,8 +116,7 @@ const HealthScreen = () => {
       <Picker
         style={styles.input}
         selectedValue={activityLevel}
-        onValueChange={(value) => setActivityLevel(value)}
-      >
+        onValueChange={(value) => setActivityLevel(value)}>
         <Picker.Item label="Select Activity Level" value="" />
         <Picker.Item label="Sedentary" value="sedentary" />
         <Picker.Item label="Light Exercise" value="light-exercise" />
@@ -76,15 +128,19 @@ const HealthScreen = () => {
       <Picker
         style={styles.input}
         selectedValue={healthGoal}
-        onValueChange={(value) => setHealthGoal(value)}
-      >
+        onValueChange={(value) => setHealthGoal(value)}>
         <Picker.Item label="Select Health Goal" value="" />
         <Picker.Item label="Weight Loss" value="weight-loss" />
         <Picker.Item label="Weight Maintenance" value="weight-maintenance" />
         <Picker.Item label="Weight Gain" value="weight-gain" />
       </Picker>
 
-      <Button title="Submit" onPress={handleSubmit} />
+      <Button
+        title="Submit"
+        disabled={!age || !gender || !height || !weight || !activityLevel || !healthGoal}
+        onPress={handleSubmit}
+      />
+      {showResult && <ResultScreen totalCalories={totalCalories} />}
     </View>
   );
 };
