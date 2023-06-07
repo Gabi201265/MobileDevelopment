@@ -1,8 +1,8 @@
 import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react';
-import { Text, View, TextInput, Button, StyleSheet, Modal, SafeAreaView } from 'react-native';
+import { Text, View, TextInput, Button, StyleSheet, Modal } from 'react-native';
 
-const FoodDatabase = () => {
+const FoodDatabase = (props) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [foodData, setFoodData] = useState(null);
   const [error, setError] = useState(null);
@@ -14,7 +14,6 @@ const FoodDatabase = () => {
     Snack: [],
     Dinner: [],
   });
-
   const APP_ID = '089c9172';
   const APP_KEY = '94b30ed41f645ed8dd6ce9796766b49b';
 
@@ -50,6 +49,11 @@ const FoodDatabase = () => {
       updatedMealPlan[selectedMeal].push(foodData);
 
       setMealPlan(updatedMealPlan);
+      console.log('Meal Plan :' + mealPlan);
+      console.log('Breakfast :', JSON.stringify(mealPlan.Breakfast[0].label));
+
+      // Call the callback function
+      props = mealPlan;
 
       // Reset state variables
       setFoodData(null);
