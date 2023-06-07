@@ -1,6 +1,6 @@
 import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react';
-import { Text, View, TextInput, Button, StyleSheet, Modal } from 'react-native';
+import { Text, View, TextInput, Button, StyleSheet, Modal, SafeAreaView } from 'react-native';
 
 const FoodDatabase = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -15,20 +15,22 @@ const FoodDatabase = () => {
     Dinner: [],
   });
 
-  const APP_ID = '44e2f578';
-  const APP_KEY = 'b91b52c750f2618779c8da62c2ae355a';
- 
+  const APP_ID = '089c9172';
+  const APP_KEY = '94b30ed41f645ed8dd6ce9796766b49b';
+
   const handleSearch = async () => {
     if (searchQuery.trim() !== '') {
       try {
-        const encodedQuery = encodeURIComponent(searchQuery);
-        const url = `https://api.edamam.com/search?q=${encodedQuery}&app_id=${APP_ID}&app_key=${APP_KEY}`;
-
+        // To encode to have spaces
+        const encodedQuery = encodeURIComponent(searchQuery.toLowerCase());
+        const url = `https://api.edamam.com/api/food-database/v2/parser?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${encodedQuery}`;
         const response = await fetch(url);
-        const result = await response.json();
+        const data = await response.json();
 
-        if (result.hits.length > 0) {
-          setFoodData(result.hits[0].recipe);
+        console.log(url);
+        console.log(data);
+        if (data.hints.length > 0) {
+          setFoodData(data.hints[0].food);
           setError(null);
         } else {
           setFoodData(null);
@@ -70,18 +72,12 @@ const FoodDatabase = () => {
         <View style={styles.resultContainer}>
           <Text style={styles.label}>Food Name : </Text>
           <Text style={styles.value}>{foodData.label}</Text>
-          <Text style={styles.label}>Calories : </Text>
-          <Text style={styles.value}>{foodData.calories.toFixed(2)}</Text>
-          <Text style={styles.label}>Other Nutritional Facts : </Text>
-          {foodData.digest.map((item, index) => (
-            <Text key={index} style={styles.value}>
-              {item.label}: {item.total.toFixed(2)} {item.unit}
-            </Text>
-          ))}
+          <Text style={styles.label}>ENERC_KCAL : </Text>
+          <Text style={styles.value}>{foodData.nutrients.ENERC_KCAL}</Text>
           <Button title="Add to Meal Plan" onPress={() => setModalVisible(true)} />
         </View>
       )}
-       <Modal visible={modalVisible} animationType="slide">
+      <Modal visible={modalVisible} animationType="slide">
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>Select Meal Type : </Text>
           <Picker
