@@ -1,37 +1,51 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
-import FoodDatabase from './FoodDatabase';
+import { MealPlanContext } from './MealPlanContext';
 
 const MealPlanning = () => {
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const meals = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
+  const meals = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
+  const { mealPlan } = useContext(MealPlanContext);
+  console.log(mealPlan['Monday']['Breakfast'][0].nutrients.ENERC_KCAL);
 
-  const [mealPlanData, setMealPlanData] = useState({
-    Breakfast: [],
-    Lunch: [],
-    Dinner: [],
-    Snack: [],
-  });
+  const renderMealItem = (day, meal) => {
+    if (mealPlan[day][meal].length > 0) {
+      return (
+        <>
+          {mealPlan[day][meal].map((foodItem, index) => (
+            <Text key={index} style={styles.foodItemText}>
+              {foodItem.label}
+            </Text>
+          ))}
+          <Text style={styles.totalCalories}>
+            Total Calories: {calculateTotalCalories(mealPlan[day][meal])}
+          </Text>
+        </>
+      );
+    } else {
+      return <Text style={styles.mealText}>No food item</Text>;
+    }
+  };
+
+  const calculateTotalCalories = (foodItems) => {
+    let totalCalories = 0;
+    foodItems.forEach((foodItem) => {
+      totalCalories += foodItem.nutrients.ENERC_KCAL;
+    });
+    return totalCalories.toFixed(2);
+  };
+
   return (
     <View style={styles.container}>
-      <FoodDatabase mealPlan={setMealPlanData} />
       <ScrollView vertical>
         {daysOfWeek.map((day) => (
           <View key={day} style={styles.dayContainer}>
             <Text style={styles.dayText}>{day}</Text>
             {meals.map((meal) => (
               <View key={meal} style={styles.mealContainer}>
-                <Text style={styles.mealText}>{meal}</Text>
-                {mealPlanData[meal].length > 0 ? (
-                  mealPlanData[meal].map((foodItem) => (
-                    <Text key={foodItem.label} style={styles.mealText}>
-                      {foodItem.label}
-                    </Text>
-                  ))
-                ) : (
-                  <Text style={styles.mealText}>No food item</Text>
-                )}
+                <Text style={styles.mealHeaderText}>{meal}</Text>
+                {renderMealItem(day, meal)}
               </View>
             ))}
           </View>
@@ -58,8 +72,20 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     marginLeft: 16,
   },
-  mealText: {
+  mealHeaderText: {
     fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  foodItemText: {
+    fontSize: 16,
+    marginLeft: 8,
+  },
+  totalCalories: {
+    fontSize: 14,
+    fontStyle: 'italic',
+    color: 'gray',
+    marginLeft: 8,
   },
 });
 
