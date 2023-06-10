@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 
 import { MealPlanContext } from './MealPlanContext';
@@ -47,7 +48,33 @@ const MealPlanning = () => {
     });
     return totalCalories.toFixed(2);
   };
+  const saveMealPlan = async (mealPlan) => {
+    try {
+      await AsyncStorage.setItem('mealPlan', JSON.stringify(mealPlan));
+    } catch (error) {
+      console.error('Error saving meal plan:', error);
+    }
+  };
 
+  const loadMealPlan = async () => {
+    try {
+      const mealPlanData = await AsyncStorage.getItem('mealPlan');
+      if (mealPlanData !== null) {
+        const parsedMealPlan = JSON.parse(mealPlanData);
+        setMealPlan(parsedMealPlan);
+      }
+    } catch (error) {
+      console.error('Error loading meal plan:', error);
+    }
+  };
+
+  useEffect(() => {
+    loadMealPlan();
+  }, []);
+
+  useEffect(() => {
+    saveMealPlan(mealPlan);
+  }, [mealPlan]);
   return (
     <View style={styles.container}>
       <ScrollView vertical>
