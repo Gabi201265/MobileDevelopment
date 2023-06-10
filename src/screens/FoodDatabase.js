@@ -81,10 +81,10 @@ const FoodDatabase = () => {
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>Select Meal Type : </Text>
           <Picker
-            style={styles.picker}
+            style={styles.mealPicker}
             selectedValue={selectedMeal}
             onValueChange={(value) => setSelectedMeal(value)}>
-            <Picker.Item label="Select Meal" value="" />
+            <Picker.Item style={styles.customLabel} label="Select Meal" value="" />
             <Picker.Item label="Breakfast" value="Breakfast" />
             <Picker.Item label="Lunch" value="Lunch" />
             <Picker.Item label="Dinner" value="Dinner" />
@@ -92,10 +92,10 @@ const FoodDatabase = () => {
           </Picker>
           <Text style={styles.modalTitle}>Select Day : </Text>
           <Picker
-            style={styles.picker}
+            style={styles.dayPicker}
             selectedValue={selectedDay}
             onValueChange={(value) => setSelectedDay(value)}>
-            <Picker.Item label="Select Day" value="" />
+            <Picker.Item style={styles.customLabel} label="Select Day" value="" />
             <Picker.Item label="Monday" value="Monday" />
             <Picker.Item label="Tuesday" value="Tuesday" />
             <Picker.Item label="Wednesday" value="Wednesday" />
@@ -104,8 +104,10 @@ const FoodDatabase = () => {
             <Picker.Item label="Saturday" value="Saturday" />
             <Picker.Item label="Sunday" value="Sunday" />
           </Picker>
-          <Button title="Add to Meal Plan" onPress={handleAddToMealPlan} />
-          <Button title="Cancel" onPress={() => setModalVisible(false)} />
+          <View style={styles.buttonContainer}>
+            <Button title="Add to Meal Plan" onPress={handleAddToMealPlan} />
+            <Button title="Cancel" onPress={() => setModalVisible(false)} />
+          </View>
         </View>
       </Modal>
     </View>
@@ -151,8 +153,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 16,
   },
-  picker: {
+  mealPicker: {
     marginBottom: 16,
+  },
+  dayPicker: {
+    marginBottom: 16,
+  },
+  customLabel: {
+    fontSize: 16,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 16,
   },
 });
 
