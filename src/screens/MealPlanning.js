@@ -1,22 +1,34 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 
 import { MealPlanContext } from './MealPlanContext';
 
 const MealPlanning = () => {
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const meals = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
-  const { mealPlan } = useContext(MealPlanContext);
-  console.log(mealPlan['Monday']['Breakfast'][0].nutrients.ENERC_KCAL);
+  const { mealPlan, setMealPlan } = useContext(MealPlanContext);
+  // console.log(mealPlan['Monday']['Breakfast'][0].nutrients.ENERC_KCAL);
 
   const renderMealItem = (day, meal) => {
+    const handleRemoveFoodItem = (index) => {
+      setMealPlan((mealPlan) => {
+        const updatedMealPlan = { ...mealPlan };
+        updatedMealPlan[day][meal].splice(index, 1);
+        return updatedMealPlan;
+      });
+    };
     if (mealPlan[day][meal].length > 0) {
       return (
         <>
           {mealPlan[day][meal].map((foodItem, index) => (
-            <Text key={index} style={styles.foodItemText}>
-              {foodItem.label}
-            </Text>
+            <View key={index} style={styles.foodItemContainer}>
+              <Text key={index} style={styles.foodItemText}>
+                {foodItem.label}
+              </Text>
+              <TouchableOpacity onPress={() => handleRemoveFoodItem(index)}>
+                <Text style={styles.removeButton}>X</Text>
+              </TouchableOpacity>
+            </View>
           ))}
           <Text style={styles.totalCalories}>
             Total Calories: {calculateTotalCalories(mealPlan[day][meal])}
@@ -80,6 +92,7 @@ const styles = StyleSheet.create({
   foodItemText: {
     fontSize: 16,
     marginLeft: 8,
+    flex: 1,
   },
   totalCalories: {
     fontSize: 14,
@@ -87,6 +100,14 @@ const styles = StyleSheet.create({
     color: 'gray',
     marginLeft: 8,
   },
+  foodItemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  removeButton: {
+    fontSize: 16,
+    color: 'red',
+  }
 });
 
 export default MealPlanning;

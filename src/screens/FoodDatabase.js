@@ -11,7 +11,7 @@ const FoodDatabase = () => {
   const [selectedMeal, setSelectedMeal] = useState('');
   const [selectedDay, setSelectedDay] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const { mealPlan, setMealPlan } = useContext(MealPlanContext);
+  const { setMealPlan } = useContext(MealPlanContext);
   const APP_ID = '089c9172';
   const APP_KEY = '94b30ed41f645ed8dd6ce9796766b49b';
 
