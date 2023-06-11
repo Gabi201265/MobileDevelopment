@@ -1,13 +1,14 @@
 # MobileDevelopment
 
-[![forthebadge](build-with-react.svg)(https://forthebadge.com)
+[![forthebadge](build-with-react.svg)](https://forthebadge.com)
 
-Le but de se projet est de créer une application en React-Native permettant de créer un Calories Counter et un Meal Planner. Pour se faire nous avons suivi les consignes ici présentes : 
-https://react-native-course-esiee.netlify.app/blog/project/
+Le but de se projet est de créer une application en React-Native permettant de créer un Calories Counter et un Meal Planner.  
+Pour se faire nous avons suivi les consignes ici présentes :  
+[React-native-course-esiee](https://react-native-course-esiee.netlify.app/blog/project/)  
 Ces consignes mettent en avant différentes étapes pour la conception de cette application.
 ## Pour commencer
 
-Rendez-vous sur ce site pour obtenir le cahier des charges et savoir si l'application correspond à vos besoins.
+Rendez-vous sur ce site pour obtenir le cahier des charges et savoir si l'application correspond à vos besoins.  
 [React-native-course-esiee](https://react-native-course-esiee.netlify.app/blog/project/) - Cahier des charges
 
 ### Pré-requis
@@ -16,9 +17,9 @@ Un pc !
 
 ### Installation
 
-Clone the repesitory GIT : ``git clone https://github.com/Gabi201265/MobileDevelopment.git``
-Install expo : ``npm install expo``
-Update async-storage if asked : ``npx expo install @react-native-async-storage/async-storage@1.17.11``
+Clone the repesitory GIT : ``git clone https://github.com/Gabi201265/MobileDevelopment.git``  
+Install expo : ``npm install expo``  
+Update modules if asked : ``npx expo install moduleName``  
 Install expo on your smartphone 
 
 ## Démarrage
