@@ -23,6 +23,7 @@ Install Expo Go on your smartphone
 
 ## Démarrage
 
+Si vous voulez enlever les warnings des fichiers chanfez en bas à droite de VS Code "Select End of Line Sequence" de CRLF à LF.  
 Ouvrer une console, et tapez ``npx expo start``
 
 ## Fabriqué avec
