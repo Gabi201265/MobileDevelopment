@@ -1,8 +1,8 @@
 # MobileDevelopment
 
-[![forthebadge](build-with-react.svg)](https://forthebadge.com)
+[![forthebadge](build-with-react.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://forthebadge.com)
 
-Le but de se projet est de créer une application en React-Native permettant de créer un Calories Counter et un Meal Planner.  
+Le but de se projet est de créer une application en React-Native permettant de créer un "Calories Counter" et un "Meal Planner".  
 Pour se faire nous avons suivi les consignes ici présentes : [React-native-course-esiee](https://react-native-course-esiee.netlify.app/blog/project/)  
 Ces consignes mettent en avant différentes étapes pour la conception de cette application.
 ## Pour commencer
@@ -19,7 +19,7 @@ Un pc !
 Clone the repesitory GIT : ``git clone https://github.com/Gabi201265/MobileDevelopment.git``  
 Install expo : ``npm install expo``  
 Update modules if asked : ``npx expo install moduleName``  
-Install expo on your smartphone 
+Install Expo Go on your smartphone 
 
 ## Démarrage
 
