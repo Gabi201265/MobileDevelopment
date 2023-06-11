@@ -1,66 +1,43 @@
 # MobileDevelopment
-_(juste en dessous des badges sympatiques à placer)_
 
-[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)  [![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)](http://forthebadge.com)
+[![forthebadge](build-with-react.svg)(https://forthebadge.com)
 
-Une petite description du projet
-
+Le but de se projet est de créer une application en React-Native permettant de créer un Calories Counter et un Meal Planner. Pour se faire nous avons suivi les consignes ici présentes : 
+https://react-native-course-esiee.netlify.app/blog/project/
+Ces consignes mettent en avant différentes étapes pour la conception de cette application.
 ## Pour commencer
 
-Entrez ici les instructions pour bien débuter avec votre projet...
+Rendez-vous sur ce site pour obtenir le cahier des charges et savoir si l'application correspond à vos besoins.
+[React-native-course-esiee](https://react-native-course-esiee.netlify.app/blog/project/) - Cahier des charges
 
 ### Pré-requis
 
-Ce qu'il est requis pour commencer avec votre projet...
-
-- Programme 1
-- Programme 2
-- etc...
+Un pc !
 
 ### Installation
 
-Les étapes pour installer votre programme....
-
-Dites ce qu'il faut faire...
-
-_exemple_: Executez la commande ``telnet mapscii.me`` pour commencer ensuite [...]
-
-
-Ensuite vous pouvez montrer ce que vous obtenez au final...
+Clone the repesitory GIT : ``git clone https://github.com/Gabi201265/MobileDevelopment.git``
+Install expo : ``npm install expo``
+Update async-storage if asked : ``npx expo install @react-native-async-storage/async-storage@1.17.11``
+Install expo on your smartphone 
 
 ## Démarrage
 
-Dites comment faire pour lancer votre projet
+Ouvrer une console, et tapez ``npx expo start``
 
 ## Fabriqué avec
 
-Entrez les programmes/logiciels/ressources que vous avez utilisé pour développer votre projet
-
-_exemples :_
-* [Materialize.css](http://materializecss.com) - Framework CSS (front-end)
-* [Atom](https://atom.io/) - Editeur de textes
-
-## Contributing
-
-Si vous souhaitez contribuer, lisez le fichier [CONTRIBUTING.md](https://example.org) pour savoir comment le faire.
+* [React](https://fr.legacy.reactjs.org) - Bibliothèque JavaScript
+* [Visual Studio Code](https://code.visualstudio.com) - Editeur de texte
+* [Expo](https://expo.dev) -  open-source platform for making universal native apps for Android, IOS
 
 ## Versions
-Listez les versions ici 
-_exemple :_
-**Dernière version stable :** 5.0
-**Dernière version :** 5.1
-Liste des versions : [Cliquer pour afficher](https://github.com/your/project-name/tags)
-_(pour le lien mettez simplement l'URL de votre projets suivi de ``/tags``)_
+**Dernière version stable :** 1.0
+**Dernière version :** 1.0
+Liste des versions : [Cliquer pour afficher](https://github.com/Gabi201265/MobileDevelopment/tags)
 
 ## Auteurs
-Listez le(s) auteur(s) du projet ici !
-* **Jhon doe** _alias_ [@outout14](https://github.com/outout14)
 
-Lisez la liste des [contributeurs](https://github.com/your/project/contributors) pour voir qui à aidé au projet !
-
-_(pour le lien mettez simplement l'URL de votre projet suivi de ``/contirubors``)_
-
-## License
-
-Ce projet est sous licence ``exemple: WTFTPL`` - voir le fichier [LICENSE.md](LICENSE.md) pour plus d'informations
+* **Gabriel Leroux** _alias_ [@gabi201265](https://github.com/gabi201265)
+* **Hugo Henriques** _alias_ [@Hug0H](https://github.com/Hug0H)
 
