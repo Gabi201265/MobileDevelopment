@@ -32,7 +32,7 @@ const MealPlanning = () => {
             </View>
           ))}
           <Text style={styles.totalCalories}>
-            Total Calories: {calculateTotalCalories(mealPlan[day][meal])}
+            Total Meals's Calories: {calculateTotalCalories(mealPlan[day][meal])}
           </Text>
         </>
       );
@@ -48,6 +48,19 @@ const MealPlanning = () => {
     });
     return totalCalories.toFixed(2);
   };
+
+  const calculateTotalCaloriesPerDay = (day) => {
+    let totalCaloriesPerDay = 0;
+    meals.forEach((meal) => {
+      mealPlan[day][meal].forEach((foodItem) => {
+        totalCaloriesPerDay += foodItem.nutrients.ENERC_KCAL;
+      });
+    });
+    return totalCaloriesPerDay.toFixed(2);
+  };
+
+  
+
   const saveMealPlan = async (mealPlan) => {
     try {
       await AsyncStorage.setItem('mealPlan', JSON.stringify(mealPlan));
@@ -87,6 +100,9 @@ const MealPlanning = () => {
                 {renderMealItem(day, meal)}
               </View>
             ))}
+            <Text style={styles.totalCaloriesPerDay}>
+              Total Daily Calories: {calculateTotalCaloriesPerDay(day)}
+            </Text>
           </View>
         ))}
       </ScrollView>
@@ -125,6 +141,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontStyle: 'italic',
     color: 'gray',
+    marginLeft: 8,
+  },
+  totalCaloriesPerDay: {
+    fontSize: 15,
+    fontStyle: 'italic',
+    color: 'red',
     marginLeft: 8,
   },
   foodItemContainer: {
