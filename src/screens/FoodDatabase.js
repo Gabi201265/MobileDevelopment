@@ -67,7 +67,7 @@ const FoodDatabase = () => {
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
-      <Button title="Search" onPress={handleSearch} />
+      <Button title="Search" onPress={handleSearch} disabled={!searchQuery} />
       {error && <Text style={styles.error}>{error}</Text>}
       {foodData && (
         <View style={styles.resultContainer}>

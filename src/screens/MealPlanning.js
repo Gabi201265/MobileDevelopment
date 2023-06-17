@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   removeButton: {
     fontSize: 16,
     color: 'red',
-  }
+  },
 });
 
 export default MealPlanning;
