@@ -1,6 +1,7 @@
 import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Modal, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import ResultScreen from './ResultScreen';
 
@@ -47,29 +48,29 @@ const HealthScreen = () => {
   const calculateTotalCalories = (bmr, activityLevel, healthGoal) => {
     let totalCalories = 0;
     switch (activityLevel) {
-      case 'sedentary':
+      case 'Sedentary':
         totalCalories = bmr * 1.2;
         break;
-      case 'light-exercise':
+      case 'Light Exercise':
         totalCalories = bmr * 1.375;
         break;
-      case 'moderate-exercise':
+      case 'Moderate Exercise':
         totalCalories = bmr * 1.55;
         break;
-      case 'heavy-exercise':
+      case 'Heavy Exercise':
         totalCalories = bmr * 1.725;
         break;
-      case 'extra-active':
+      case 'Extra Active':
         totalCalories = bmr * 1.9;
         break;
       default:
         break;
     }
     switch (healthGoal) {
-      case 'weight-loss':
+      case 'Weight Loss':
         totalCalories -= 500;
         break;
-      case 'weight-gain':
+      case 'Weight Gain':
         totalCalories += 500;
         break;
       default:
@@ -79,14 +80,17 @@ const HealthScreen = () => {
   };
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.input}>
         <TextInput
           style={styles.container}
+          numberOfLines={1}
+          maxLength={2}
           placeholder="Age"
-          value={age}
           onChangeText={setAge}
-          keyboardType="numeric"
+          value={age}
+          keyboardType="default"
+          enterKeyHint="enter"
         />
       </View>
 
@@ -107,8 +111,8 @@ const HealthScreen = () => {
                 style={styles.modalText}
                 selectedValue={gender}
                 onValueChange={(itemValue, itemIndex) => setGender(itemValue)}>
-                <Picker.Item label="Male" value="male" />
-                <Picker.Item label="Female" value="female" />
+                <Picker.Item label="Male" value="Male" />
+                <Picker.Item label="Female" value="Female" />
               </Picker>
               <Button
                 title="Close"
@@ -194,9 +198,9 @@ const HealthScreen = () => {
                 style={styles.modalText}
                 selectedValue={healthGoal}
                 onValueChange={(itemValue, itemIndex) => setHealthGoal(itemValue)}>
-                <Picker.Item label="Weight Loss" value="weight-loss" />
-                <Picker.Item label="Weight Maintenance" value="weight-maintenance" />
-                <Picker.Item label="Weight Gain" value="weight-gain" />
+                <Picker.Item label="Weight Loss" value="Weight Loss" />
+                <Picker.Item label="Weight Maintenance" value="Weight Maintenance" />
+                <Picker.Item label="Weight Gain" value="Weight Gain" />
               </Picker>
               <Button
                 title="Close"
@@ -217,7 +221,7 @@ const HealthScreen = () => {
         />
         {showResult && <ResultScreen totalCalories={totalCalories} />}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -226,6 +230,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     justifyContent: 'center',
+    backgroundColor: 'red',
   },
   input: {
     marginBottom: 16,
@@ -235,6 +240,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: 'green',
   },
   modalView: {
     margin: 20,
