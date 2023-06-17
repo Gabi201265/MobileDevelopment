@@ -83,6 +83,7 @@ const HealthScreen = () => {
       <TextInput
         style={styles.input}
         placeholder="Age"
+        maxLength={2}
         value={age}
         onChangeText={setAge}
         keyboardType="numeric"
@@ -100,6 +101,7 @@ const HealthScreen = () => {
       <TextInput
         style={styles.input}
         placeholder="Height (in cm)"
+        maxLength={3}
         value={height}
         onChangeText={setHeight}
         keyboardType="numeric"
@@ -108,6 +110,7 @@ const HealthScreen = () => {
       <TextInput
         style={styles.input}
         placeholder="Weight (in kg)"
+        maxLength={3}
         value={weight}
         onChangeText={setWeight}
         keyboardType="numeric"

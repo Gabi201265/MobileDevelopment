@@ -63,6 +63,7 @@ const FoodDatabase = () => {
       <TextInput
         style={styles.input}
         placeholder="Enter food name"
+        maxLength={24}
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
