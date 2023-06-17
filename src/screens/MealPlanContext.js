@@ -5,7 +5,7 @@ export const MealPlanContext = createContext();
 const getDayMealPlan = () => {
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const dayMealPlan = {};
-  for (let day of daysOfWeek) {
+  for (const day of daysOfWeek) {
     dayMealPlan[day] = {
       Breakfast: [],
       Lunch: [],

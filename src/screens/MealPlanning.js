@@ -59,8 +59,6 @@ const MealPlanning = () => {
     return totalCaloriesPerDay.toFixed(2);
   };
 
-  
-
   const saveMealPlan = async (mealPlan) => {
     try {
       await AsyncStorage.setItem('mealPlan', JSON.stringify(mealPlan));
